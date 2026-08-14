@@ -4,13 +4,17 @@ using PortafolioAPI.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+// Conexión a la base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configuración de CORS
+// =========================================================
+// EL ESCUDO ANTI-CORS DEFINITIVO
+// =========================================================
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("PermitirTodo", policy =>
+    options.AddPolicy("CorsPolicy", policy =>
     {
         policy.AllowAnyOrigin()
               .AllowAnyMethod()
@@ -20,11 +24,14 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ¡ESTE ORDEN ES CRÍTICO!
-app.UseCors("PermitirTodo"); // Debe ir después de Build() y antes de MapControllers()
+// =========================================================
+// ACTIVACIÓN (Debe ir exactamente en esta línea)
+// =========================================================
+app.UseCors("CorsPolicy"); 
 
 app.UseAuthorization();
 app.MapControllers();
+
 app.MapGet("/", () => "¡API de Hermes conectada y lista!");
 
 app.Run();
