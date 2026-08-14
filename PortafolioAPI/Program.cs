@@ -3,29 +3,28 @@ using PortafolioAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Habilitar los controladores
 builder.Services.AddControllers();
-
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Configuración de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirTodo", policy =>
     {
         policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 
 var app = builder.Build();
 
-app.UseCors("PermitirTodo");
+// ¡ESTE ORDEN ES CRÍTICO!
+app.UseCors("PermitirTodo"); // Debe ir después de Build() y antes de MapControllers()
 
-// 2. Activar las rutas de los controladores
+app.UseAuthorization();
 app.MapControllers();
-
 app.MapGet("/", () => "¡API de Hermes conectada y lista!");
 
 app.Run();
