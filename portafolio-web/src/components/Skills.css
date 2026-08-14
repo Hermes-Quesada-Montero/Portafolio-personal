@@ -1,0 +1,54 @@
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem 2.5rem;
+  margin-top: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 90px;
+}
+
+/* El diseño exacto de los círculos de tu foto original */
+.skill-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: var(--bg-card); /* Fondo oscuro */
+  border: 2px solid var(--border); /* Borde grisáceo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* Efecto hover cuando pasas el mouse */
+.skill-item:hover .skill-circle {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+}
+
+.skill-image {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+}
+
+.skill-emoji {
+  font-size: 2rem;
+}
+
+.skill-name {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 500;
+}

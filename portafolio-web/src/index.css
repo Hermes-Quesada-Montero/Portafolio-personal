@@ -1,0 +1,200 @@
+/* ================================================================
+   PORTAFOLIO — ESTILOS GLOBALES
+================================================================ */
+
+:root {
+  --bg-primary   : #0d1117;
+  --bg-secondary : #161b22;
+  --bg-card      : #1a1f2e;
+  --border       : #30363d;
+  --text-primary : #e6edf3;
+  --text-muted   : #8b949e;
+  --accent       : #3b82d4;
+  --accent-hover : #2563bb;
+  --success      : #22c55e;
+
+  --font-sans    : -apple-system, "Segoe UI", system-ui, sans-serif;
+  
+  --fs-xs        : 0.75rem;
+  --fs-sm        : 0.875rem;
+  --fs-base      : 1rem;
+  --fs-md        : 1.125rem;
+  --fs-lg        : 1.5rem;
+  --fs-xl        : 2rem;
+  --fs-2xl       : 2.75rem;
+  --fs-3xl       : 3.5rem;
+
+  --space-1      : 0.25rem;
+  --space-2      : 0.5rem;
+  --space-3      : 0.75rem;
+  --space-4      : 1rem;
+  --space-5      : 1.25rem;
+  --space-6      : 1.5rem;
+  --space-8      : 2rem;
+  --space-12     : 3rem;
+  --space-16     : 4rem;
+  --space-24     : 6rem;
+
+  --max-width    : 1100px;
+  --nav-height   : 64px;
+  --radius-sm    : 6px;
+  --radius-md    : 12px;
+  --radius-full  : 9999px;
+
+  --transition   : 0.3s ease;
+  --shadow-sm    : 0 2px 8px rgba(0,0,0,.35);
+  --shadow-md    : 0 8px 24px rgba(0,0,0,.45);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { cursor: pointer; font-family: inherit; border: none; }
+
+/* ---------------------------------------------------------------
+   UTILIDADES DE DISEÑO
+--------------------------------------------------------------- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.section {
+  padding: var(--space-24) 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-2);
+}
+
+.section-title {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Colores para el Modo Claro */
+[data-theme="light"] {
+  --bg-primary   : #ffffff;
+  --bg-secondary : #f6f8fa;
+  --bg-card      : #ffffff;
+  --border       : #d0d7de;
+  --text-primary : #1f2328;
+  --text-muted   : #57606a;
+  --shadow-sm    : 0 2px 8px rgba(0,0,0,.08);
+  --shadow-md    : 0 8px 24px rgba(0,0,0,.12);
+}
+
+/* NOTIFICACIONES TOAST PERSONALIZADAS */
+.custom-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  padding: 16px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* CURSOR DE MÁQUINA DE ESCRIBIR */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Escudo de visibilidad para Modo Claro y Oscuro */
+.project-card, .admin-panel, .contact-card, .form-input, .form-textarea {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Para que los textos de tarjetas tengan un poco más de cuerpo en modo claro */
+body.light-mode h3, body.light-mode p, body.light-mode h4 {
+  color: #1f2937 !important; /* Un gris muy oscuro para mejor lectura */
+}
+
+/* Asegurar que el icono de las tarjetas no se pierda */
+.project-image-wrapper {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}

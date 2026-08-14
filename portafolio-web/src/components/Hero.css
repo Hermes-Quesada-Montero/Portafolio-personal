@@ -1,0 +1,145 @@
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: calc(var(--nav-height) + var(--space-8)) var(--space-6) var(--space-16);
+  position: relative;
+}
+
+/* Fondo con cuadrícula sutil */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+/* Foto de perfil */
+.hero-photo-wrapper {
+  margin: 0 auto var(--space-6);
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-full);
+  border: 3px solid var(--accent);
+  padding: 3px;
+  background: var(--bg-secondary);
+  box-shadow: 0 0 0 6px rgba(59,130,212,.12);
+  animation: float 4s ease-in-out infinite;
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-full);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Textos y Animaciones de entrada */
+.hero-greeting {
+  color: var(--text-muted);
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-2);
+  animation: fadeInUp 0.6s ease both;
+}
+
+.hero-name {
+  font-size: var(--fs-3xl);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  animation: fadeInUp 0.6s ease 0.15s both;
+}
+
+.hero-title {
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  color: var(--accent);
+  margin: var(--space-3) 0 var(--space-4);
+  min-height: 2.5rem;
+  animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 0.9s step-start infinite;
+  color: var(--accent);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hero-description {
+  color: var(--text-muted);
+  font-size: var(--fs-md);
+  max-width: 540px;
+  margin: 0 auto var(--space-8);
+  animation: fadeInUp 0.6s ease 0.45s both;
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.6s ease 0.6s both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Indicador de scroll abajo */
+.scroll-indicator {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  opacity: 0.5;
+}
+
+.scroll-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  animation: scrollBounce 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: .5; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* Responsive para el nombre en pantallas pequeñas */
+@media (max-width: 768px) {
+  .hero-name { font-size: var(--fs-2xl); }
+}
+
+@media (max-width: 480px) {
+  .hero-cta { flex-direction: column; align-items: center; }
+}
