@@ -47,7 +47,8 @@ export default function Navbar() {
           </a>
         </div>
         
-        <ul className="nav-links">
+        {/* CORRECCIÓN: Agregamos style para permitir scroll horizontal en móviles */}
+        <ul className="nav-links" style={{ overflowX: 'auto', whiteSpace: 'nowrap', scrollbarWidth: 'none' }}>
           <li>
             <a href="#home" className={`nav-link ${activeSection === 'home' ? 'active' : ''}`}>
               Home

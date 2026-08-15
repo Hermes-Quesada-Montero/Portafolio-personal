@@ -57,24 +57,29 @@ export default function Contact() {
             >
               
               {/* Lado Izquierdo: Icono + Textos */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+              {/* CORRECCIÓN: Agregamos minWidth: 0 para que no desborde */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', minWidth: 0 }}>
                 <div style={{ 
                   width: '64px', height: '64px', 
                   background: 'rgba(255,255,255,0.03)', 
                   borderRadius: '16px', 
                   display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                  fontSize: '1.8rem' 
+                  fontSize: '1.8rem',
+                  flexShrink: 0 // Evita que el icono se aplaste
                 }}>
                   {c.mainIcon.startsWith('http') ? <img src={c.mainIcon} alt="" style={{ width: '50%', height: '50%', objectFit: 'contain' }} /> : c.mainIcon}
                 </div>
-                <div>
+                {/* CORRECCIÓN: Agregamos minWidth: 0 aquí también */}
+                <div style={{ minWidth: 0 }}>
                   <h4 style={{ margin: '0 0 0.3rem 0', color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: '600' }}>{c.title}</h4>
-                  <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.95rem' }}>{c.value}</p>
+                  {/* CORRECCIÓN: Agregamos wordBreak: 'break-all' para cortar textos largos como el correo */}
+                  <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.95rem', wordBreak: 'break-all' }}>{c.value}</p>
                 </div>
               </div>
 
               {/* Lado Derecho: Botones Funcionales Reales */}
-              <div style={{ display: 'flex', gap: '12px' }}>
+              {/* CORRECCIÓN: Agregamos flexShrink: 0 y un margen izquierdo para que no sean aplastados por el correo */}
+              <div style={{ display: 'flex', gap: '12px', flexShrink: 0, marginLeft: '10px' }}>
                 
                 {/* Botón de Ir (Abre en pestaña nueva) */}
                 {c.redirectUrl && (
