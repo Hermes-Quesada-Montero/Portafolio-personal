@@ -9,9 +9,6 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// =========================================================
-// EL ESCUDO ANTI-CORS DEFINITIVO
-// =========================================================
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
@@ -25,13 +22,29 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // =========================================================
-// ACTIVACIÓN (Debe ir exactamente en esta línea)
+// NUEVO: CREAR LAS TABLAS EN SUPABASE AUTOMÁTICAMENTE
 // =========================================================
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        // Esto ejecuta las migraciones y crea las tablas que faltan
+        context.Database.Migrate(); 
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Ocurrió un error al migrar la base de datos: " + ex.Message);
+    }
+}
+
+// Activación del CORS
 app.UseCors("CorsPolicy"); 
 
 app.UseAuthorization();
 app.MapControllers();
 
-app.MapGet("/", () => "¡API de Hermes conectada y lista!");
+app.MapGet("/", () => "¡API conectada, lista y con base de datos migrada!");
 
 app.Run();
