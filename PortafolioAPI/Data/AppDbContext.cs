@@ -7,14 +7,21 @@ namespace PortafolioAPI.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        // La tabla de proyectos que ya tenías
         public DbSet<Project> Projects { get; set; }
         
-        // NUEVA: La tabla para tus habilidades
         public DbSet<Skill> Skills { get; set; }
 
         public DbSet<ContactItem> ContactItems { get; set; }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+
+        // Configuración para apuntar al  esquema privado
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            
+            // Esta línea obliga a Entity Framework a usar tu nuevo esquema "portafolio"
+            modelBuilder.HasDefaultSchema("portafolio");
+        }
     }
 }
